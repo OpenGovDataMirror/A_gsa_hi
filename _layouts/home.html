@@ -1,0 +1,26 @@
+---
+layout: default
+---
+
+{% for post in site.posts %}
+
+  {% capture day %}{{ post.date | date: '%m%d%Y' }}{% endcapture %}
+  {% capture nday %}{{ post.next.date | date: '%m%d%Y' }}{% endcapture %}
+
+  {% if day != nday %}
+    <h5 class="date">{{ post.date | date: "%A, %B %e, %Y" }}</h5>
+  {% endif %}
+    <article class="{% if forloop.first %}first{% elsif forloop.last %}last{% else %}middle{% endif %}">
+      <div class="entry">
+        <a href="https://github.com/{{ post.author }}"><img src="https://github.com/{{ post.author }}.png?size=40" alt="{{ post.author }}"></a>
+        <div class="block">
+          <h5><a href="https://github.com/{{ post.author }}">{{ post.author }}</a> <a href="https://github.com/{{ post.author }}" class="date" title="{{ post.date | date: "%b %d, %Y %H:%M:%S" }}">{{ post.date | date: "%H:%M" }}</a></h5>
+
+          {{ post.content }}
+        </div>
+      </div><!-- end .entry -->
+    </article>
+
+{% endfor %}
+
+{% include form.html %}
